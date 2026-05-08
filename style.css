@@ -1,0 +1,275 @@
+/* ── Reset & base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6fb;
+  color: #1a1a2e;
+  min-height: 100vh;
+  padding: 2rem 1rem 4rem;
+}
+
+/* ── App shell ── */
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+header h1 { font-size: 2rem; font-weight: 700; color: #2d2d6b; }
+.subtitle   { color: #555; margin-top: .4rem; }
+
+/* ── Progress stepper ── */
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .25rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+.step-btn {
+  background: none;
+  border: 1.5px solid #c5c8d8;
+  border-radius: 20px;
+  padding: .3rem .85rem;
+  font-size: .8rem;
+  color: #888;
+  cursor: pointer;
+  transition: all .18s;
+}
+.step-btn.active {
+  background: #2d2d6b;
+  border-color: #2d2d6b;
+  color: #fff;
+  font-weight: 600;
+}
+.step-btn.done {
+  background: #e8f0fe;
+  border-color: #4a90d9;
+  color: #2d5ca8;
+  cursor: pointer;
+}
+.step-btn:disabled { opacity: .35; cursor: default; }
+.step-sep { color: #bbb; font-size: .9rem; }
+
+/* ── Cards ── */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  padding: 1.75rem 2rem;
+  margin-bottom: 1.5rem;
+  transition: opacity .25s;
+}
+.card.hidden { display: none; }
+
+.step-label {
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #4a90d9;
+  margin-bottom: .75rem;
+}
+
+/* ── Drop zone ── */
+.drop-zone {
+  border: 2px dashed #b0b8d0;
+  border-radius: 10px;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .2s, background .2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .6rem;
+  color: #555;
+}
+.drop-zone.drag-over { border-color: #4a90d9; background: #eef4fd; }
+.drop-zone:hover     { border-color: #7799cc; }
+.drop-zone svg       { color: #7799cc; }
+.file-name { margin-top: .75rem; font-size: .9rem; color: #444; }
+
+/* ── Column chips ── */
+.column-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin: .75rem 0 1.25rem;
+}
+.chip {
+  padding: .35rem .85rem;
+  border-radius: 20px;
+  font-size: .85rem;
+  border: 1.5px solid #c5c8d8;
+  background: #f4f6fb;
+  color: #555;
+  cursor: pointer;
+  transition: all .15s;
+}
+.chip.active {
+  background: #2d2d6b;
+  border-color: #2d2d6b;
+  color: #fff;
+}
+
+/* ── Condition builder ── */
+.condition-col-card {
+  border: 1px solid #dde2ee;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  background: #fafbff;
+}
+.condition-col-card h3 {
+  font-size: .95rem;
+  font-weight: 600;
+  color: #2d2d6b;
+  margin-bottom: .6rem;
+}
+.col-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: .65rem;
+}
+.toggle-label { font-size: .88rem; color: #444; }
+
+.delimiter-row {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  margin-bottom: .65rem;
+  font-size: .85rem;
+  color: #555;
+}
+.delimiter-row select, .delimiter-row input[type=text] {
+  padding: .3rem .5rem;
+  border: 1px solid #c5c8d8;
+  border-radius: 6px;
+  font-size: .85rem;
+  background: #fff;
+}
+.delimiter-row input[type=text] { width: 60px; }
+
+.token-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin-top: .5rem;
+}
+.token-chip {
+  padding: .25rem .65rem;
+  border-radius: 14px;
+  font-size: .8rem;
+  border: 1.5px solid #c5c8d8;
+  background: #f4f6fb;
+  color: #555;
+  cursor: pointer;
+  transition: all .15s;
+}
+.token-chip.selected {
+  background: #e63946;
+  border-color: #c1121f;
+  color: #fff;
+}
+.token-hint { font-size: .78rem; color: #888; margin-top: .4rem; }
+
+/* ── Condition summary badge ── */
+.condition-summary {
+  background: #eef4fd;
+  border-left: 3px solid #4a90d9;
+  border-radius: 6px;
+  padding: .65rem 1rem;
+  font-size: .85rem;
+  color: #2d5ca8;
+  margin-bottom: 1rem;
+}
+.condition-summary.hidden { display: none; }
+
+/* ── Table toolbar ── */
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.row-count { font-size: .85rem; color: #777; margin-left: auto; }
+
+/* ── Table ── */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #e2e6f0;
+}
+table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+th {
+  background: #2d2d6b;
+  color: #fff;
+  padding: .6rem .8rem;
+  text-align: left;
+  font-weight: 600;
+  white-space: nowrap;
+}
+td {
+  padding: .5rem .8rem;
+  border-bottom: 1px solid #eee;
+  white-space: nowrap;
+}
+tr:last-child td   { border-bottom: none; }
+tr:nth-child(even) { background: #f8f9ff; }
+
+/* Highlight condition columns in table */
+.col-condition { background: #fff8e1 !important; }
+th.col-condition { background: #c8860a !important; }
+
+.col-new-order, .col-orig-order {
+  color: #888;
+  font-size: .8rem;
+  min-width: 60px;
+}
+th.col-new-order, th.col-orig-order { background: #444; }
+
+/* ── Buttons ── */
+.actions {
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.confirm-bar { margin-top: 1.25rem; }
+
+.btn-primary, .btn-secondary, .btn-ghost, .btn-success {
+  padding: .55rem 1.2rem;
+  border-radius: 8px;
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all .18s;
+}
+.btn-primary  { background: #2d2d6b; color: #fff; }
+.btn-primary:hover  { background: #1e1e50; }
+.btn-secondary { background: #e8eaf6; color: #2d2d6b; }
+.btn-secondary:hover { background: #d0d5ee; }
+.btn-ghost { background: transparent; color: #444; border: 1.5px solid #c5c8d8; }
+.btn-ghost:hover { border-color: #7799cc; color: #2d2d6b; }
+.btn-success { background: #2e7d32; color: #fff; }
+.btn-success:hover { background: #1b5e20; }
+.btn-success:disabled { background: #aaa; cursor: default; }
+
+.hint { font-size: .82rem; color: #777; }
+code  { background: #f0f0f0; padding: .1em .35em; border-radius: 4px; font-size: .85em; }
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .card { padding: 1.25rem 1rem; }
+  .actions { flex-direction: column; align-items: stretch; }
+  .btn-primary, .btn-ghost, .btn-success { text-align: center; }
+}
