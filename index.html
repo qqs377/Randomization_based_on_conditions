@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Row Randomizer</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>🔀 Row Randomizer</h1>
+      <p class="subtitle">Upload an Excel file, configure conditions, randomize rows, and export.</p>
+    </header>
+
+    <!-- Progress stepper -->
+    <nav class="stepper" id="stepper">
+      <button class="step-btn" data-step="0">1 Upload</button>
+      <span class="step-sep">›</span>
+      <button class="step-btn" data-step="1">2 Columns</button>
+      <span class="step-sep">›</span>
+      <button class="step-btn" data-step="2">3 Conditions</button>
+      <span class="step-sep">›</span>
+      <button class="step-btn" data-step="3">4 Preview</button>
+      <span class="step-sep">›</span>
+      <button class="step-btn" data-step="4">5 Export</button>
+    </nav>
+
+    <!-- Step 1: Upload -->
+    <section class="card" id="section-upload">
+      <div class="step-label">Step 1 — Upload</div>
+      <div class="drop-zone" id="dropZone">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/>
+          <line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        <p>Drag &amp; drop an <strong>.xlsx / .xls / .csv</strong> file here</p>
+        <span>or</span>
+        <label class="btn-secondary" for="fileInput">Browse file</label>
+        <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" hidden />
+      </div>
+      <div id="fileName" class="file-name"></div>
+    </section>
+
+    <!-- Step 2: Column selector -->
+    <section class="card hidden" id="section-columns">
+      <div class="step-label">Step 2 — Select Columns to Keep</div>
+      <p class="hint">Toggle the columns you want included in the output.</p>
+      <div class="column-chips" id="columnChips"></div>
+      <div class="actions">
+        <button class="btn-ghost" id="btnSelectAll">Select all</button>
+        <button class="btn-ghost" id="btnDeselectAll">Deselect all</button>
+        <button class="btn-primary" id="btnApplyColumns">Apply &amp; Configure Conditions →</button>
+      </div>
+    </section>
+
+    <!-- Step 3: Condition configuration -->
+    <section class="card hidden" id="section-conditions">
+      <div class="step-label">Step 3 — Configure Conditions</div>
+      <p class="hint">
+        Choose which columns contain conditions (e.g. treatment group, disease, sex).
+        If a column has multiple values crammed into one cell (like <code>Female Aspirin Healthy</code>),
+        pick a delimiter to split it first.
+      </p>
+
+      <div id="conditionBuilder"></div>
+
+      <div class="actions" style="margin-top:1.5rem">
+        <button class="btn-ghost" id="btnBackToColumns">← Back</button>
+        <button class="btn-ghost" id="btnSkipConditions">Skip (plain shuffle)</button>
+        <button class="btn-primary" id="btnApplyConditions">Apply &amp; Preview →</button>
+      </div>
+    </section>
+
+    <!-- Step 4: Preview & Randomize -->
+    <section class="card hidden" id="section-preview">
+      <div class="step-label">Step 4 — Preview &amp; Randomize</div>
+
+      <div id="conditionSummary" class="condition-summary hidden"></div>
+
+      <div class="table-toolbar">
+        <button class="btn-primary" id="btnRandomize">🔀 Randomize rows</button>
+        <button class="btn-ghost" id="btnReset">↩ Reset to original order</button>
+        <span class="row-count" id="rowCount"></span>
+      </div>
+      <div class="table-wrapper">
+        <table id="previewTable">
+          <thead id="tableHead"></thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+      <div class="actions confirm-bar">
+        <button class="btn-ghost" id="btnBackToConditions">← Back</button>
+        <button class="btn-success" id="btnConfirm" disabled>✅ Confirm &amp; Export</button>
+        <span class="hint" id="confirmHint">Randomize first to enable export.</span>
+      </div>
+    </section>
+
+    <!-- Step 5: Export -->
+    <section class="card hidden" id="section-export">
+      <div class="step-label">Step 5 — Download</div>
+      <p>Your randomized data is ready!</p>
+      <div class="actions">
+        <button class="btn-ghost" id="btnBackToPreview">← Back</button>
+        <button class="btn-primary" id="btnExport">⬇️ Download Excel (.xlsx)</button>
+        <button class="btn-ghost" id="btnStartOver">↩ Start over</button>
+      </div>
+    </section>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
